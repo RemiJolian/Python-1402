@@ -1,6 +1,3 @@
-import math
-
-
 class Consts:
     # You can change these numbers to your custom prices
     BASE_PRICE = {'worker': 200, 'teacher': 150, 'engineer': 250}
@@ -11,31 +8,43 @@ class Consts:
     MIN_AGE = 5
     AGE_MUL = 5
 
-
 class Person:
-    instances = []
+    instances = [] # all objects of kind  ofperson
 
     def __init__(self, name, age):
-        pass
+        self.name = name
+        self.age = age
+        self.level = 1
+        self.job = ""
+        self.work_place = None
+        Person.instances.append(self) # add object itself
+        
 
     def do_level(self, income):
-        pass
-
+        a = income * math.sqrt(self.level * self.work_place.level)
+        return a
+        
     def calc_income(self):
-        pass
+        pass            # Blank
 
     def calc_life_cost(self):
-        pass
+        pass            # Blank
 
     def calc(self):
-        pass
+        income = self.calc_income()
+        cost = self.calc_life_cost()
+        return self.do_level(income) - cost
 
     def get_job(self):
-        pass
+        return self.job
 
     def upgrade(self):
-        pass
+        self.level += 1
 
     @staticmethod
     def calc_all():
+        s = 0
+        for obj in Person.instances:
+            s += obj.calc()
+        return s
         pass

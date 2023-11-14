@@ -2,18 +2,20 @@
 
 import pygame
 import sys
-
+import random
 # Start pygame Modules; All modules please be ready!:
 pygame.init() 
 
 def generate_pipe_rect():
-    pipe_rect = pipe_image.get_rect(midtop=(700, 250))
+    random_pipe = random.randrange(200, 350)
+    pipe_rect = pipe_image.get_rect(midtop=(700, random_pipe))
     return pipe_rect
 
 def move_pipe_rect(pipes):
     for pipe in pipes:
         pipe.centerx -= 5
-    return pipes
+    inside_pipes = [pipe for pipe in pipes if pipe.right > -50 ]
+    return inside_pipes
 
 def display_pipes(pipes):
     for pipe in pipes:

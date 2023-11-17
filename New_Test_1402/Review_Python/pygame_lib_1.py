@@ -11,7 +11,6 @@ blue = (0, 0, 255)
 green = (0, 255, 0)
 gray = (128, 128, 128)
 purple = (128, 0, 128)
-purple = (128, 0, 128)
 white = (255, 255, 255)
 
 pygame.font.Font(None, 240)

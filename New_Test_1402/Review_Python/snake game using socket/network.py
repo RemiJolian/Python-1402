@@ -7,6 +7,11 @@ class Network:
         self.host = host
         self.port = port
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	#ببین اطلاعاتی که در
+ start دریافت می‌کنی رو باید داخل شیء ذخیره کنی تا بعدا‌ً قابل‌استفاده باشن. بنابراین در تابع __init__ یه self.data تعریف کن و برابر با دیکشنری خالی قرارش بده. بعد در start وقتی response رو دریافت کردی، با استفاده از json.loads به دیکشنری تبدیلش کن و داخل self.data بریزش.
+
+
+ حالا داخل تابع send_data دیگه نیازی نداری که کانکت بشی، چون اطلاعات رو در self.data داری. سعی کن با این تغییرات، تابع send_data رو بازنویسی کنی. اگه مشکلت حل نشد یا بازم سؤالی بود، حتماً ازمون بپرس
 
     def start(self):
         self.s.connect((self.host, self.port))

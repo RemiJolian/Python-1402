@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <h1>Weather Forecast</h1>
+    <form method="POST">
+        <input type="text" name="city" placeholder="Enter city name" required>
+        <button type="submit">Get Forecast</button>
+    </form>
+
+    {% if weather_data %}
+        <h2>City: {{ weather_data.city }}, {{ weather_data.country }}</h2>
+        <ul>
+            {% for forecast in weather_data.forecast %}
+                <li>
+                    <strong>{{ forecast.date }}</strong>
+                    <img src="http://openweathermap.org/img/w/{{ forecast.icon }}.png" alt="{{ forecast.description }}">
+                    {{ forecast.description }} - {{ forecast.temperature }}°C
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

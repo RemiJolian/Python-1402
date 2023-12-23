@@ -1,0 +1,7 @@
+- We can build a web based dashboard with various components, all without
+writing JavaScript or HTML.
+- So by using dash, we can create web app only by python.
+- Who is Dash for? It is particular useful for data analysis or data scientists
+that are already familiar with Python.
+
+

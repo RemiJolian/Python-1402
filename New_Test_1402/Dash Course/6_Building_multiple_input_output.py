@@ -10,26 +10,26 @@ line_fig = px.line(happiness[happiness['country']=='United States'],
 app = Dash()
 
 app.layout = html.Div([
-    html.H1("World Happiness Dashboard"),
-    html.P(['This dashboard shows the happiness score.',
-            html.Br(),
-            html.A('World Happiness Report Data Source',
-                   href = 'https://worldhappiness.report',
-                   target = '_blank')]),
-    dcc.Checklist(options = happiness['region'].unique(),
-                   value = ['North America']),
-    dcc.Dropdown(id = 'country-dropdown',
-                 options = happiness['country'].unique(),
-                 value = 'United States'),
-    dcc.RadioItems(id='data-radio',
-                   # u can use also a list: options=['happiness_score', 'happiness_rank']
-                   options={
-                       'happiness_score': 'Happiness Score',
-                       'happiness_rank': 'Happiness Rank'
-                   },
-                   value='happiness_score'),
-    dcc.Graph(id = 'happiness-graph'),
-    html.Div(id='average-div')
+                    html.H1("World Happiness Dashboard"),
+                    html.P(['This dashboard shows the happiness score.',
+                            html.Br(),
+                            html.A('World Happiness Report Data Source',
+                                href = 'https://worldhappiness.report',
+                                target = '_blank')]),
+                    dcc.Checklist(options = happiness['region'].unique(),
+                                value = ['North America']),
+                    dcc.Dropdown(id = 'country-dropdown',
+                                options = happiness['country'].unique(),
+                                value = 'United States'),
+                    dcc.RadioItems(id='data-radio',
+                                # u can use also a list: options=['happiness_score', 'happiness_rank']
+                                options={
+                                    'happiness_score': 'Happiness Score',
+                                    'happiness_rank': 'Happiness Rank'
+                                },
+                                value='happiness_score'),
+                    dcc.Graph(id = 'happiness-graph'),
+                    html.Div(id='average-div')
                    ])
 
 @app.callback(

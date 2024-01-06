@@ -9,7 +9,7 @@ app.layout = html.Div(children = [
             html.Br(),
             html.A('World Happiness Report Data Source',
                    href = 'https://worldhappiness.report',
-                   target = '_blank')])
+                    target = '_blank')])
 ])
 
 

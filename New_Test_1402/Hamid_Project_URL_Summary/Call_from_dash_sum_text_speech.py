@@ -13,7 +13,7 @@ the summarize_and_read_aloud function is called and the summary is displayed as 
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
-from dash.dependencies import Input
+from dash.dependencies import Input, Output
 from bs4 import BeautifulSoup
 import requests
 from sumy.parsers.plaintext import PlaintextParser

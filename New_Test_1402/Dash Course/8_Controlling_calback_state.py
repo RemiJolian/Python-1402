@@ -58,6 +58,8 @@ def update_dropdown(selected_region):
 
 def update_graph(button_click, selected_country, selected_data):
     filtered_happiness = happiness[happiness['country']==selected_country]
+    #Is global nessecery?:
+    global line_fig
     line_fig = px.line(filtered_happiness,
                        x='year', y=selected_data,
                        title = f'{selected_data} in {selected_country}')

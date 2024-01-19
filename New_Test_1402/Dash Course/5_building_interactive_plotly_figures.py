@@ -3,9 +3,6 @@ import pandas as pd
 import plotly.express as px
 
 happiness = pd.read_csv('Dash Course/world_happiness.csv')
-line_fig = px.line(happiness[happiness['country']=='United States'],
-                               x = 'year', y = 'happiness_score',
-                               title = 'Happiness Score in the USA')
 
 app = Dash()
 
@@ -17,9 +14,9 @@ app.layout = html.Div([
                    href = 'https://worldhappiness.report',
                    target = '_blank')]),
     # dcc.RadioItems(options = happiness['region'].unique(),
-    #                value = 'North America'),
-    dcc.Checklist(options = happiness['region'].unique(),
-                   value = ['North America']),
+    #                 value = 'North America'),
+    # dcc.Checklist(options = happiness['region'].unique(),
+    #                value = ['North America']),
     dcc.Dropdown(id = 'country-dropdown',
                  options = happiness['country'].unique(),
                  value = 'United States'),
@@ -37,5 +34,7 @@ def update_graph(selected_country):
                        x='year', y='happiness_score',
                        title = f'Happiness Score in {selected_country}')
     return line_fig
+
+
 if __name__ == '__main__':
     app.run_server(debug = True)  

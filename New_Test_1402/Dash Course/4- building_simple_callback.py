@@ -33,14 +33,14 @@ if __name__ == '__main__':
     app.run_server(debug = True) 
 
 # Value:
-
 # Purpose: Stores a single value or piece of information associated with a component.
 # Common uses:
 # Holding the text content of input components like text boxes, sliders, dropdowns, etc.
 # Setting options for components like radios or checkboxes.
-# Example in code: The value property of the dcc.Input component holds the input text entered by the user.
+# Example in code: The value property of the dcc.Input component holds the input text
+# entered by the user.
+    
 # Children:
-
 # Purpose: Represents the content or elements nested within a container component.
 # Common uses:
 # Grouping multiple components together within a layout.

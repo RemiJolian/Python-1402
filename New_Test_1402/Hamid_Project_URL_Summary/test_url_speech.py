@@ -1,30 +1,60 @@
-from dash import Dash, html, dcc, Input, Output
-from bs4 import BeautifulSoup
+#Import the required libraries
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
 import requests
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lsa import LsaSummarizer
-from gtts import gTTS
-import IPython.display as ipd
+from bs4 import BeautifulSoup
 
+# Create a Dash app object
+app = dash.Dash(__name__)
 
-app = Dash()
-
-
+# Define the layout of the app
 app.layout = html.Div([
-    dcc.Input(id='input-text',value='Change this text',type='text'),
-    html.Div(id = 'output-text')
+    # A title
+    html.H1("Web Content Extractor"),
+    # A text input for the URL
+    dcc.Input(id="url-input", type="text", placeholder="Enter a URL", value=""),
+    # A button to submit the URL
+    html.Button(id="submit-button", children="Submit"),
+    # A div to display the output
+    html.Div(id="output-div")
 ])
 
-
+# Define a callback function to handle the button click
 @app.callback(
-    Output(component_id = 'output-text', component_property = 'children'),
-    Input(component_id = 'input-text', component_property = 'value')
+    # The output is the div element
+    dash.dependencies.Output("output-div", "children"),
+    # The input is the URL and the button
+    [dash.dependencies.Input("url-input", "value"),
+     dash.dependencies.Input("submit-button", "n_clicks")]
 )
+def extract_text(url, n_clicks):
+    # If the button is clicked
+    if n_clicks:
+        # Try to get the response from the URL
+        try:
+            response = requests.get(url)
+            # If the response is successful
+            if response.status_code == 200:
+                # Parse the HTML content
+                soup = BeautifulSoup(response.content, "html.parser")
+                # Extract the text from the body tag
+                text = soup.body.get_text()
+                # Return the text as the output
+                return text
+            # If the response is not successful
+            else:
+                # Return an error message
+                return f"Error: {response.status_code}"
+        # If the URL is invalid or unreachable
+        except requests.exceptions.RequestException as e:
+            # Return an error message
+            return f"Error: {e}"
+    # If the button is not clicked
+    else:
+        # Return an empty output
+        return ""
 
-def update_output_div(input_text):
-    return f'Your Text : {input_text}'
-
-
-if __name__ == '__main__':
-    app.run_server(debug = True) 
+# Run the app on the local server
+if __name__ == "__main__":
+    app.run_server(debug=True)

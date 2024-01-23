@@ -1,9 +1,14 @@
 #Import the required libraries
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
-import requests
+from dash import dcc, html
+from dash.dependencies import Input, Output, State
 from bs4 import BeautifulSoup
+import requests
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer
+from gtts import gTTS
+import IPython.display as ipd
 
 # Create a Dash app object
 app = dash.Dash(__name__)
@@ -40,8 +45,12 @@ def extract_text(url, n_clicks):
                 soup = BeautifulSoup(response.content, "html.parser")
                 # Extract the text from the body tag
                 text = soup.body.get_text()
-                # Return the text as the output
-                return text
+                # Summarize the text of content
+                sentence_count = 5
+                parser = PlaintextParser.from_string(text, Tokenizer("english"))
+                summarizer = LsaSummarizer()
+                summary = summarizer(parser.document, sentence_count)
+                return [str(sentence) for sentence in summary]
             # If the response is not successful
             else:
                 # Return an error message

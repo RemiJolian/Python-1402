@@ -22,16 +22,17 @@ app.layout = html.Div([
     # A button to submit the URL
     html.Button(id="submit-button", children="Submit"),
     # A div to display the output
-    html.Div(id="output-div")
+    html.Div(id="output-summary-div")
+    #html.Div(id="output-speech-div")
 ])
 
 # Define a callback function to handle the button click
 @app.callback(
     # The output is the div element
-    dash.dependencies.Output("output-div", "children"),
     # The input is the URL and the button
-    dash.dependencies.Input("url-input", "value"),
-    dash.dependencies.Input("submit-button", "n_clicks")
+    Output("output-summary-div", "children"),
+    Input(component_id="url-input",component_property="value"),
+    Input(component_id="submit-button", component_property="n_clicks")
 )
 def extract_text(url, n_clicks):
     # If the button is clicked
@@ -50,7 +51,9 @@ def extract_text(url, n_clicks):
                 parser = PlaintextParser.from_string(text, Tokenizer("english"))
                 summarizer = LsaSummarizer()
                 summary = summarizer(parser.document, sentence_count)
-                return [str(sentence) for sentence in summary]
+                summary_text = [str(sentence) for sentence in summary]
+                #return summary_text and speech file
+                return summary_text
             # If the response is not successful
             else:
                 # Return an error message

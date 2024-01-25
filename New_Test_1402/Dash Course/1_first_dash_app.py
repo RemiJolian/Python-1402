@@ -2,7 +2,7 @@ from dash import Dash, html
 
 app = Dash()
 
-app.layout = html.Div('Hello!This is my first Dashboard')
+app.layout = html.Div('Hello!This is my first Dash App')
 
 if __name__ == '__main__':
     app.run_server(debug = True)

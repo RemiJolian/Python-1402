@@ -4,7 +4,6 @@ import plotly.express as px
 
 happiness = pd.read_csv('Dash Course/world_happiness.csv')
 line_fig = px.line(happiness[happiness['country']=='United States'],
-                               #see below comment   
                                x = 'year', y = 'happiness_score',
                                title = 'Happiness Score in the USA')
 

@@ -49,7 +49,7 @@ if __name__ == '__main__':
 # Key differences:
 
 # Scope: value typically holds a single value within a component, while children can contain multiple elements or components.
-# Mutability: value is often directly modifiable by the user (e.g., through input fields), while children are usually updated programmatically through callbacks.
+# Mutability: value is often directly modifiable by the user (e.g., through input fields), while children are usually updated programmatically through callbacks
 # In the provided code:
 
 # value: Used to store and retrieve the text entered by the user in the dcc.Input component.

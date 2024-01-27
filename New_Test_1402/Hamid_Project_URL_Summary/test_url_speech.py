@@ -23,16 +23,16 @@ app.layout = html.Div([
     # A button to submit the URL
     html.Button(id="submit-button", children="Submit"),
     # A div to display the output
-    #html.Div(id="output-summary-div"),
+    html.Div(id="output-summary-div"),
     html.Div(id="output-speech-div")
 ])
 
 # Define a callback function to handle the button click
 @app.callback(
     # The output is the div element
-    # The input is the URL and the button
-    #Output("output-summary-div", "children"),
+    Output("output-summary-div", "children"),
     Output("output-speech-div", "children"),
+    # The input is the URL and the button
     Input(component_id="url-input",component_property="value"),
     Input(component_id="submit-button", component_property="n_clicks")
 )
@@ -53,15 +53,17 @@ def extract_text(url, n_clicks):
                 parser = PlaintextParser.from_string(text, Tokenizer("english"))
                 summarizer = LsaSummarizer()
                 summary = summarizer(parser.document, sentence_count)
-                summary_text = [str(sentence) for sentence in summary]
+                summary_text =' '.join(str(sentence) for sentence in summary)
                 my_language = 'en'
                 tts = gTTS(text=summary_text, lang=my_language, slow=False)
                 tts.save("summary.mp3")
-                with open("summary.mp3", "rb") as audio_file:
-                    encoded_string = base64.b64encode(audio_file.read()).decode('utf-8')
-                audio_final = html.Audio(src=f"data:audio/mp3;base64,{encoded_string}", controls=True)
+                # Second method:
+                #with open("summary.mp3", "rb") as audio_file:
+                    #encoded_string = base64.b64encode(audio_file.read()).decode('utf-8')
+                #audio_final = html.Audio(src=f"data:audio/mp3;base64,{encoded_string}", controls=True)
                 #return summary_text and speech file
-                return audio_final
+                audio_final = html.Audio(src='data:audio/mpeg;base64,{}'.format(base64.b64encode(open('summary.mp3', 'rb').read()).decode()), controls=True)
+                return summary_text, audio_final
             # If the response is not successful
             else:
                 # Return an error message

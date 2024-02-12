@@ -1,0 +1,11 @@
+dash ver 2.15.0
+from bs4 import BeautifulSoup
+import requests 2.31.0
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer
+import IPython.display as ipd
+import base64
+import pyttsx3
+
+pip 24.0
